@@ -1,0 +1,137 @@
+
+    .navbar a.nav-link:hover {
+      background-color: #dc3545;
+      color: #fff;
+    }
+    .navbar-brand{
+      margin-left:10px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand img {
+        width: 50px; 
+        height: 50px; 
+        border-radius: 50%;
+        object-fit: cover; 
+    }
+    #features {
+      padding: 7% 15%;
+      background-color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-box {
+      text-align: center;
+      padding: 5%;
+    }
+    .icon {
+      color: #ef8172;
+      margin-bottom: 1rem;
+    }
+    .icon:hover {
+      color: #ff4c68;
+    }
+    #testimonials {
+      padding: 7% 15%;
+      text-align: center;
+      background-color: #ef8172;
+      color: #fff;
+    }
+    .testimonials-img {
+      width: 100%; 
+      max-height: 400px; 
+      border-radius: 0;
+      margin: 20px 0;
+    }
+    .welcome-heading {
+      text-align: center;
+      margin-bottom: 50px;
+      color: black;
+      font-family: 'Roboto';
+      margin-top: 0;    
+      margin-bottom: 10px; 
+
+    }
+    #why {
+      padding: 7% 15%;
+      background-color: #fff;
+    }
+    .big-heading {
+      font-family: 'Roboto','Liberation Sans';
+      font-size: 3rem;
+      line-height: 1.5;
+      color: black;
+    }
+    .title-img {
+      width: 100%; 
+      max-width: 500px;
+      margin-top: 20px;
+    }
+    #about {
+      padding: 7% 15%;
+      text-align: center;
+    }
+    #contact{
+      padding: 7% 15%;
+      text-align: center;
+
+    }
+
+    /* form by donor style */
+
+    /*  */
+    @media (max-width: 1028px) {
+    #title {
+      text-align: center;
+    }
+    .title-img {
+      position: static;
+      transform: rotate(0);
+    }
+    #features {
+      display: block;
+      margin: 5px;
+      padding: 3%px;
+    }
+    #testimonials {
+      margin: 20px 0;
+    }
+    .card {
+      margin-bottom: 20px; 
+  }
+}
+.navbar a.nav-link:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+.icon {
+  color: #ef8172;
+  margin-bottom: 1rem;
+}
+.icon:hover {
+  color: #ff4c68;
+}
+.navbar-brand {
+  margin-left: 10px;
+}
+.navbar a.nav-link:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+.icon {
+  color: #ef8172;
+  margin-bottom: 1rem;
+}
+.icon:hover {
+  color: #ff4c68;
+}
+.navbar-brand{
+  margin-left:10px;
+}
+::before,
+  ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #ffffff;
+  }
