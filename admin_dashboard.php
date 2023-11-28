@@ -48,7 +48,7 @@ $requester_info_result = $conn->query($requester_info_query);
     <style>
         /* Add custom styles here */
         body {
-            padding-top: 60px; /* Adjust the top padding for fixed navbar */
+            padding-top: 60px; /* Adjust the top padding for the fixed navbar */
         }
 
         @media (max-width: 767px) {
@@ -99,7 +99,6 @@ $requester_info_result = $conn->query($requester_info_query);
                 echo "</tr>";
             }
             ?>
-            
         </tbody>
     </table>
 
@@ -192,42 +191,28 @@ $requester_info_result = $conn->query($requester_info_query);
     <!-- Include Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Your JavaScript functions -->
+    <!-- Include your JavaScript functions -->
     <script>
         function openEditDonorModal(donorId) {
-            // Make an AJAX request to get the donor information based on donorId
-            // Update the modal input fields with the retrieved donor information
-            // For simplicity, I'll use the Fetch API for the AJAX request
-
             fetch(`get_donor.php?donorId=${donorId}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Update the modal input fields
                     document.getElementById('donorId').value = data.id;
                     document.getElementById('firstName').value = data.firstName;
                     document.getElementById('lastName').value = data.lastName;
                     document.getElementById('email').value = data.email;
 
-                    // Show the modal
                     var editDonorModal = new bootstrap.Modal(document.getElementById('editDonorModal'));
-                    
                     editDonorModal.show();
-                   
                 })
                 .catch(error => console.error('Error:', error));
-                
         }
 
         function saveDonorChanges() {
-            // Make an AJAX request to save the changes in the database
-            // For simplicity, I'll use the Fetch API for the AJAX request
-
             var donorId = document.getElementById('donorId').value;
             var firstName = document.getElementById('firstName').value;
             var lastName = document.getElementById('lastName').value;
             var email = document.getElementById('email').value;
-
-            // You can add more fields as needed
 
             fetch('save_donor_changes.php', {
                 method: 'POST',
@@ -238,70 +223,61 @@ $requester_info_result = $conn->query($requester_info_query);
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Handle the response, e.g., close the modal or show a success message
                     console.log('Success:', data);
+                    sendEmail(donorId, 'updated');
 
-                    // Close the modal
                     var editDonorModal = new bootstrap.Modal(document.getElementById('editDonorModal'));
                     editDonorModal.hide();
                 })
                 .catch(error => console.error('Error:', error));
         }
 
-        function editDonor(donorId) {
-            // Implement edit donor functionality
-            console.log("Edit donor with ID: " + donorId);
-        }
-
-        function deleteDonor(donorId) {
-            // Confirm the deletion
-            var confirmDelete = confirm("Are you sure you want to delete this donor?");
-
-            if (confirmDelete) {
-                // Make an AJAX request to delete the donor
-                fetch('delete_donor.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'donorId=' + donorId,
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Handle the response, e.g., show a success message or log an error
-                        console.log(data);
-
-                        // Refresh the page or update the donor list if needed
-                        location.reload();
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        }
-
-        function viewDonor(donorId) {
-            // Implement view donor functionality
-            console.log("View donor with ID: " + donorId);
-        }
-
-        function acceptBloodRequest(requestId) {
-            // Implement accept blood request functionality
-            console.log("Accept blood request with ID: " + requestId);
-        }
-
-        function referBloodRequest(requestId) {
-            // Implement refer blood request functionality
-            console.log("Refer blood request with ID: " + requestId);
-        }
-
         function acceptRequester(requesterId) {
-            // Implement accept requester functionality
-            console.log("Accept requester with ID: " + requesterId);
-        }
+            // Dummy logic for demonstration purposes
+            console.log('Accepted requester with ID:', requesterId);
+            sendRequesterEmail(requesterId, 'accepted');
 
-        function rejectRequester(requesterId) {
-            // Implement reject requester functionality
-            console.log("Reject requester with ID: " + requesterId);
+            // Add your actual logic here for accepting a requester
         }
+        function rejectRequester(requesterId) {
+            console.log('Rejected requester with ID:', requesterId);
+            // Add your actual logic here for accepting a requester
+            sendRequesterEmail(requesterId, 'rejected');
+        }
+        function sendEmail(donorId, status) {
+            fetch('send_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'donorId=' + donorId + '&status=' + status,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Email Sent:', data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        
+        function sendRequesterEmail(requesterId, status) {
+    fetch('send_requester_email.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'requesterId=' + requesterId + '&status=' + status,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text(); // Change to response.text() to get the complete response text
+    })
+    .then(data => {
+        console.log('Email Sent to Requester:', data);
+    })
+    .catch(error => console.error('Error:', error));
+}
     </script>
 </body>
 
