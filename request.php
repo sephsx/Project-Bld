@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form method="post">
                     <!-- Add fields for requester information and blood type requested -->
                     <div class="mb-3">
-                        <label for="requesterName" class="form-label">Your Name</label>
+                        <label for="requesterName" class="form-label">Your Full Name</label>
                         <input type="text" class="form-control" id="requesterName" name="requesterName" required>
                     </div>
                     <div class="mb-3">

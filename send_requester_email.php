@@ -2,11 +2,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer-master/src/Exception.php';
-require 'PHPMailer-master/src/PHPMailer.php';
-require 'PHPMailer-master/src/SMTP.php';
-
-
+// Include the Composer autoload file
+require 'vendor/autoload.php';
 
 // Set content type to JSON and allow CORS
 header('Content-Type: application/json');
@@ -59,59 +56,39 @@ if ($result->num_rows > 0) {
     $subject = "Blood Request Status";
     $message = "Your blood request status is: " . $status;
 
-// Use PHPMailer for secure email sending
-$phpmailer = new PHPMailer(true);
-try {
-    //Server settings for Gmail
-    $phpmailer->isSMTP();
-    $phpmailer->Host = 'smtp.gmail.com';
-    $phpmailer->SMTPAuth = true;
-    $phpmailer->Port = 587;  // Use 465 for SSL
-    $phpmailer->Username = 'joseph.olorbida@evsu.edu.ph';  // Your Gmail email address
-    $phpmailer->Password = 'Deathafterdeath12';  // Your Gmail password
-    $phpmailer->SMTPSecure = 'tls';  // Use 'ssl' for SSL
+    // Use PHPMailer for secure email sending
+    $phpmailer = new PHPMailer(true);
+    try {
+        // Server settings for Gmail
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'smtp.gmail.com';
+        $phpmailer->SMTPAuth = true;
+        $phpmailer->Port = 587;  // Use 465 for SSL
+        $phpmailer->Username = 'bloodlink001@gmail.com';  // Your Gmail email address
+        $phpmailer->Password = 'yull lrff otbe rego';  // Your Gmail password
+        $phpmailer->SMTPSecure = 'tls';  // Use 'ssl' for SSL
 
-    //Recipients
-    $phpmailer->setFrom('joseph.olorbida@evsu.edu.ph', 'Joseph');
-    $phpmailer->addAddress($to);
+        // Recipients
+        $phpmailer->setFrom('bloodlink001@gmail.com', 'Blood Link');
+        $phpmailer->addAddress($to);
 
-    //Content
-    $phpmailer->isHTML(true);
-    $phpmailer->Subject = $subject;
-    $phpmailer->Body = $message;
+        // Content
+        $phpmailer->isHTML(true);
+        $phpmailer->Subject = $subject;
+        $phpmailer->Body = $message;
 
-    $phpmailer->send();
-    echo json_encode(['success' => true, 'message' => 'Email sent successfully']);
-} catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Failed to send email: ' . $phpmailer->ErrorInfo]);
-}
-
+        $phpmailer->send();
+        echo json_encode(['success' => true, 'message' => 'Email sent successfully']);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Failed to send email: ' . $phpmailer->ErrorInfo]);
+    }
 } else {
+    // Log the query result for debugging
+    error_log('Requester not found. Query result: ' . json_encode($result));
+
     echo json_encode(['success' => false, 'message' => 'Requester not found']);
 }
 
 // Close the database connection
 $conn->close();
 ?>
-
-<script>
-  function sendRequesterEmail(requesterId, status) {
-    fetch('send_requester_email.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'requesterId=' + requesterId + '&status=' + status,
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Email Sent to Requester:', data);
-        })
-        .catch(error => console.error('Error:', error));
-}
-</script>

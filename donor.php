@@ -89,10 +89,10 @@ button {
           <label for="mobileNumber">Mobile Number</label>
           <input type="tel" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="bagsOfBlood">Bags of Blood</label>
           <input type="number" class="form-control" id="bagsOfBlood" name="bagsOfBlood" placeholder="Bags of Blood" required>
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="sex">Gender</label>
           <select class="form-control" id="sex" name="sex">
@@ -201,11 +201,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $bloodType = $_POST['bloodGroup'];
     $weight = $_POST['weight'];
-    $bagsofBlood = $_POST['bagsOfBlood'];
+    // $bagsofBlood = $_POST['bagsOfBlood'];
     
     // Execute query
-    $sql = "INSERT INTO donor (firstName, lastName, age, address, phoneNumber, sex, email, bloodType ,weight, bagsOfBlood)
-VALUES ('$firstName','$lastName', '$age', '$address', '$phoneNumber', '$sex', '$email', '$bloodType' , '$weight', '$bagsofBlood')";
+    $sql = "INSERT INTO donor (firstName, lastName, age, address, phoneNumber, sex, email, bloodType ,weight )
+VALUES ('$firstName','$lastName', '$age', '$address', '$phoneNumber', '$sex', '$email', '$bloodType' , '$weight')";
 
 
 

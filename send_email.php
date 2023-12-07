@@ -66,11 +66,11 @@ if ($donorInformation) {
         $phpmailer->Host = 'smtp.gmail.com';
         $phpmailer->SMTPAuth = true;
         $phpmailer->Port = 2525;
-        $phpmailer->Username = 'joseph.olorbida@evsu.edu.ph';
-        $phpmailer->Password = 'Deathafterdeath12'; // Use the one you see in your third-party connections
+        $phpmailer->Username = 'bloodlink001@gmail.com';
+        $phpmailer->Password = 'yull lrff otbe rego'; // Use the one you see in your third-party connections
 
         // Sender and recipient details
-        $senderEmail = 'olorbidajoseph05@gmail.com';
+        $senderEmail = 'bloodlink001@gmail.com';
         $recipientEmail = $donorInformation['email'];
 
         // Set email content
@@ -96,3 +96,4 @@ if ($donorInformation) {
 // Return the response as JSON
 echo json_encode($response);
 ?>
+

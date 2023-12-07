@@ -190,7 +190,7 @@
           <h3>Contact Details</h3>
           <p><strong>Address:</strong> temporary</p>
           <p><strong>Contact Number:</strong> temporary</p>
-          <p><strong>Email:</strong> bloodbank@gmail.com</p>
+          <p><strong>Email:</strong> bloodlink001@gmail.com</p>
         </div>
       </div>
     </div>
